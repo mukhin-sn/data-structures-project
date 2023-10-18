@@ -8,7 +8,15 @@ class TestStack(unittest.TestCase):
         stack_1 = Stack()
         stack_1.push(24)
         stack_1.push(125)
+        stack_1.push(736)
+
+        with self.assertRaises(AttributeError):
+            stack_1.top.next_node.next_node.next_node.data
+
+        self.assertEquals(stack_1.top.data, 736)
+        self.assertEquals(stack_1.top.next_node.data, 125)
+        self.assertEquals(stack_1.pop(), 736)
         self.assertEquals(stack_1.top.data, 125)
         self.assertEquals(stack_1.top.next_node.data, 24)
-        with self.assertRaises(AttributeError):
-            stack_1.top.next_node.next_node.data
+        self.assertEquals(stack_1.pop(), 125)
+        self.assertEquals(stack_1.top.next_node, None)
