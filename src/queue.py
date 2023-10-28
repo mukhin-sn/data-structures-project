@@ -14,6 +14,7 @@ class Node:
 class Queue:
     """Класс для очереди"""
 
+    # Список 'data_node' нужен для реализации вывода в методе __str__
     data_node = []
 
     def __init__(self):
@@ -43,12 +44,21 @@ class Queue:
 
         :return: данные удаленного элемента
         """
-        pass
+        if self.head is None:
+            self.tail = self.head
+            out_data = None
+        else:
+            out_data = self.head.data
+            self.head = self.head.next_node
+            Queue.data_node.pop(0)
+        return out_data
+
+
 
     def __str__(self):
         """Магический метод для строкового представления объекта"""
 
         if self.tail is None:
-            return ""
+            return "None"
         else:
             return "\n".join(Queue.data_node)
