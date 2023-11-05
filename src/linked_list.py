@@ -1,5 +1,6 @@
 class Node:
     """Класс для узла односвязного списка"""
+
     def __init__(self, data, next_node=None):
         """
         Конструктор класса Node
@@ -11,6 +12,7 @@ class Node:
 
 class LinkedList:
     """Класс для односвязного списка"""
+
     def __init__(self):
         """Конструктор класса LinkedList"""
         self.head = None
@@ -52,3 +54,25 @@ class LinkedList:
 
         ll_string += 'None'
         return ll_string
+
+    def to_list(self):
+        """Возвращает список с данными односвязного списка"""
+        out_list = []
+        if self.head is None:
+            return out_list
+
+        node = self.head
+        while node:
+            out_list.append(node.data)
+            node = node.next_node
+        return out_list
+
+    def get_data_by_id(self, id_value):
+        data_list = self.to_list()
+        for dict_var in data_list:
+            try:
+                if dict_var["id"] == id_value:
+                    return dict_var
+            except TypeError:
+                print("Данные не являются словарем или в словаре нет id.")
+        return f"Нет данных с id:{id_value}"
